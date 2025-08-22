@@ -60,7 +60,10 @@ python main.py
 
 ## 📺 Demo
 
-![demo-placeholder](https://github.com/giriaryan694-a11y/virtual-scam-baiter/blob/main/Screen%20Recording%202025-08-22%20222448.mp4)
+<video src="https://github.com/giriaryan694-a11y/virtual-scam-baiter/blob/main/Screen%20Recording%202025-08-22%20222448.mp4" controls width="600">
+  Your browser does not support the video tag.
+</video>
+
 
 ---
 
