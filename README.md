@@ -60,7 +60,7 @@ python main.py
 
 ## 📺 Demo
 
-[![Watch the demo](screenrecord.mp4)](https://github.com/giriaryan694-a11y/virtual-scam-baiter/blob/main/Screen%20Recording%202025-08-22%20222448.mp4)
+[![Watch the demo](screenshot.png)](https://github.com/giriaryan694-a11y/virtual-scam-baiter/blob/main/Screenshot%202025-08-22%20230516.png)
 
 
 ---
