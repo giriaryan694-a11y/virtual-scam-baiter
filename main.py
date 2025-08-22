@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
+# Author: Aryan
+# Copyright: 2025 Aryan
+# GitHub: https://github.com/giriaryan694-a11y
+# Note: Unauthorized copying without credit is prohibited
 Virtual Scam Baiter - PyQt5 GUI
-
 Educational tool to simulate scam conversations for training purposes.
 """
 
