@@ -72,7 +72,7 @@ python main.py
 
 ---
 ## Recommendations 
- ** vist this site to see my documentary on scammers (last updated 23 Aug, 2025) : https://giriaryan694-a11y.github.io/virtual-scam-baiter/
+ vist this site to see my documentary on scammers (last updated 23 Aug, 2025) : https://giriaryan694-a11y.github.io/virtual-scam-baiter/
 
 ---
 
