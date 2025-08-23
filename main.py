@@ -213,7 +213,7 @@ class MainWindow(QMainWindow):
 
         system_prompt = BASE_SYSTEM + "\n\n" + MODE_PROMPTS[self.current_mode]
         user_prompt = f"Scammer: {scam_text}\nRespond as victim + add tactic note."
-        self._append_system_message("Baiter is typing...")
+        self._append_system_message("Scammer is typing...")
 
         if not self.api_key:
             QMessageBox.warning(self, "No API key", "Add Gemini API key in key.txt")
