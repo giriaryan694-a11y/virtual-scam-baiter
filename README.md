@@ -9,8 +9,6 @@
 - **Scenario library** — prebuilt scenarios (tech support, romance, invoice fraud, delivery spoof, fake refunds).
 - **Consent-first flow** — built-in participant consent and logging prompts to ensure legal compliance.
 - **Detection training modules** — checklists, red-flag indicators, live scoring.
-- **Record & replay** — transcripts, metadata, and anonymized logs for post-run analysis.
-- **Trainer controls** — escalate/dial-back intensity, inject twist pivots, or simulate social engineering escalation.
 - **Report generation** — exportable training reports for trainees and orgs.
 ---
 
