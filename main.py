@@ -226,7 +226,7 @@ class MainWindow(QMainWindow):
 
     def _on_worker_finished(self, text: str):
         self._append_chat_message("baiter", text)
-        self.session_messages.append({"role": "baiter", "content": text})
+        self.session_messages.append({"role": "Scammer", "content": text})
 
     def _on_worker_error(self, err: str):
         QMessageBox.critical(self, "API Error", f"Gemini API error:\n{err}")
