@@ -70,6 +70,9 @@ python main.py
 # ![virtual-scam-baiter](https://github.com/giriaryan694-a11y/virtual-scam-baiter/blob/main/screenrecording.mp4)
 # ![virtual-scam-baiter](https://github.com/giriaryan694-a11y/virtual-scam-baiter/blob/main/Screenshot%202025-08-22%20230516.png)
 
+---
+## Recommendations 
+ **vist this site to see my documentary on scammers (last updated 23 Aug, 2025) : https://giriaryan694-a11y.github.io/virtual-scam-baiter/
 
 ---
 
