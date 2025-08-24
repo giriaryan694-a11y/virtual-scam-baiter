@@ -7,7 +7,6 @@
 Virtual Scam Baiter - PyQt5 GUI
 Educational tool to simulate scam conversations for training purposes.
 """
-
 import os
 import sys
 import json
@@ -15,7 +14,6 @@ import datetime
 import textwrap
 import traceback
 import subprocess
-
 from PyQt5.QtCore import QThread, pyqtSignal, Qt
 from PyQt5.QtGui import QTextCursor
 from PyQt5.QtWidgets import (
@@ -35,16 +33,14 @@ Your goal: roleplay a scammer to help a local user learn social engineering red 
 IMPORTANT RULES:
  - NEVER ask the human to provide real sensitive data.
  - If normally passwords/OTPs/SSNs/bank details are requested, ask for fake placeholders only.
- - Include one short educational hint in [brackets].
+ - Include one short educational hint in [Tactic Note...].
  - Stay conversational and realistic.
 """).strip()
-
 MODE_PROMPTS = {
     "romance": "Act like an online romantic interest using flattery and emotions.",
     "financial": "Act like a financial scammer using urgency and authority.",
     "unauthorized": "Act like IT/HR staff or a hacker pretexting for access.",
 }
-
 
 # --- Helpers ---
 def load_api_key(path=KEY_FILE):
@@ -53,10 +49,8 @@ def load_api_key(path=KEY_FILE):
     with open(path, "r", encoding="utf-8") as f:
         return f.read().strip()
 
-
 def ensure_transcripts_dir():
     os.makedirs(TRANSCRIPTS_DIR, exist_ok=True)
-
 
 def save_transcript(session_name, messages):
     ensure_transcripts_dir()
@@ -65,7 +59,6 @@ def save_transcript(session_name, messages):
     with open(filename, "w", encoding="utf-8") as f:
         json.dump({"session": session_name, "messages": messages}, f, indent=2, ensure_ascii=False)
     return filename
-
 
 # --- Gemini Worker ---
 class GeminiWorker(QThread):
@@ -83,22 +76,18 @@ class GeminiWorker(QThread):
         try:
             from google import genai
             client = genai.Client(api_key=self.api_key)
-
             joined_prompt = self.system_prompt + "\n\n" + self.user_prompt
             resp = client.models.generate_content(model=self.model, contents=joined_prompt)
-
             text = getattr(resp, "text", "") or getattr(resp, "output_text", "")
             if not text:
                 try:
                     text = resp.output[0].content[0].text
                 except Exception:
                     text = str(resp)
-
             self.finished.emit(text.strip())
         except Exception as e:
             tb = traceback.format_exc()
             self.error.emit(f"{e}\n\nTraceback:\n{tb}")
-
 
 # --- Main Window ---
 class MainWindow(QMainWindow):
@@ -106,13 +95,10 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("Virtual Scam Baiter — GUI")
         self.resize(720, 600)
-
         self.api_key = load_api_key()
         self.session_messages = []
         self.current_mode = "romance"
-
         self._build_ui()
-
         if not self.api_key:
             self._ask_for_key()
 
@@ -194,7 +180,7 @@ class MainWindow(QMainWindow):
         if sender == "user":
             html = f'<div style="margin:6px 0; text-align:left"><b>User:</b> {text}</div>'
         else:
-            html = f'<div style="margin:6px 0; text-align:right"><b>Baiter:</b> {text}</div>'
+            html = f'<div style="margin:6px 0; text-align:right"><b>Scammer:</b> {text}</div>'
         self.chat.append(html)
         self._scroll_chat_to_bottom()
 
@@ -210,22 +196,24 @@ class MainWindow(QMainWindow):
         self._append_chat_message("user", scam_text)
         self.session_messages.append({"role": "user", "content": scam_text})
         self.input_box.clear()
-
         system_prompt = BASE_SYSTEM + "\n\n" + MODE_PROMPTS[self.current_mode]
-        user_prompt = f"Scammer: {scam_text}\nRespond as victim + add tactic note."
+        user_prompt = f"User: {scam_text}\nScammer: [Scammer is typing...]\nRespond as scammer + add a [Tactic Note...] in the response."
         self._append_system_message("Scammer is typing...")
-
         if not self.api_key:
             QMessageBox.warning(self, "No API key", "Add Gemini API key in key.txt")
             return
-
         self.worker = GeminiWorker(self.api_key, system_prompt, user_prompt)
         self.worker.finished.connect(self._on_worker_finished)
         self.worker.error.connect(self._on_worker_error)
         self.worker.start()
 
     def _on_worker_finished(self, text: str):
-        self._append_chat_message("baiter", text)
+        cursor = self.chat.textCursor()
+        cursor.movePosition(QTextCursor.End)
+        cursor.select(QTextCursor.BlockUnderCursor)
+        cursor.removeSelectedText()
+        cursor.deleteChar()
+        self._append_chat_message("Scammer", text)
         self.session_messages.append({"role": "Scammer", "content": text})
 
     def _on_worker_error(self, err: str):
@@ -258,7 +246,6 @@ class MainWindow(QMainWindow):
         self.chat.clear()
         self.session_messages = []
 
-
 # --- Main ---
 def main():
     app = QApplication(sys.argv)
@@ -266,7 +253,5 @@ def main():
     win.show()
     sys.exit(app.exec_())
 
-
 if __name__ == "__main__":
     main()
-           
